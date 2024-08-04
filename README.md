@@ -1,2 +1,3 @@
-# gc-hub
-🏂 Not a garbage collection hub.
+gc-hub
+
+记录一些比较有用的工具和脚本
