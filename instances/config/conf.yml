@@ -1,0 +1,17 @@
+database:
+  host: localhost
+  port: 3306
+  username: admin
+  password: secret
+
+logging:
+  level: DEBUG
+  file: /var/log/myapp.log
+
+server:
+  host: 0.0.0.0
+  port: 8080
+  security:
+    enable_ssl: true
+    certificate_path: /etc/ssl/certs/myapp.crt
+    key_path: /etc/ssl/private/myapp.key
