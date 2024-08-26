@@ -3,8 +3,23 @@ import logging.handlers
 import socket
 import os
 from datetime import datetime
+from functools import wraps
 
 
+def singleton(func):
+    instances = {}
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        key = (args, frozenset(kwargs.items()))
+        if key not in instances:
+            instances[key] = func(*args, **kwargs)
+        return instances[key]
+
+    return wrapper
+
+
+@singleton
 # 配置日志记录器
 def setup_logger(log_directory="logs", log_level="INFO"):
     # 获取当前日期和主机名
