@@ -10,5 +10,5 @@ class Config:
         return cls._config
 
 # 在程序启动时加载配置文件
-CONFIG = Config.load_config('path/to/conf.yml')
+CONFIG = Config.load_config('instances/fastapi_server/config/conf.yml')
 

@@ -60,10 +60,11 @@ def setup_logger(log_directory="logs", log_level="INFO"):
     return logger
 
 
-# 使用日志记录器
-logger = setup_logger()
+if __name__ == "__main__":
+    # 使用日志记录器
+    logger = setup_logger()
 
-# 记录日志示例
-logger.info("This is an info message.")
-logger.warning("This is a warning message.")
-logger.error("This is an error message.")
+    # 记录日志示例
+    logger.info("This is an info message.")
+    logger.warning("This is a warning message.")
+    logger.error("This is an error message.")

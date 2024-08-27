@@ -2,7 +2,7 @@ import sys
 from omegaconf import OmegaConf
 
 def read_config(key):
-    config = OmegaConf.load('config/config.yaml')
+    config = OmegaConf.load('config/conf.yml')
     
     keys = key.split('.')
     value = config
