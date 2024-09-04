@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# 获取 FastAPI 服务的 PID
-PID=$(ps aux | grep '[u]vicorn' | awk '{print $2}')
+# 读取配置
+PORT=$(python config/read_config_cli server.port)
 
-# 如果找到进程 ID, 则终止进程
-if [ -n "$PID" ]; then
-  echo "Shutting down FastAPI service with PID: $PID"
-  kill $PID
+# 查找占用指定端口的所有进程 ID
+PIDS=$(lsof -t -i:$PORT)
 
-  # 等待进程终止
-  wait $PID
-  echo "FastAPI service has been shut down."
+# 判断是否找到进程 ID
+if [ -z "$PIDS" ]; then
+  echo "No process found running on port $PORT"
 else
-  echo "FastAPI service is not running."
+  # 逐个终止所有找到的进程
+  for PID in $PIDS; do
+    kill -9 $PID
+    echo "Terminated process with PID $PID."
+  done
+  echo "All FastAPI services running on port $PORT have been stopped."
 fi
