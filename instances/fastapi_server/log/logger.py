@@ -3,25 +3,9 @@ import logging.handlers
 import socket
 import os
 from datetime import datetime
-from functools import wraps
 
 
-def singleton(func):
-    instances = {}
-
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        key = (args, frozenset(kwargs.items()))
-        if key not in instances:
-            instances[key] = func(*args, **kwargs)
-        return instances[key]
-
-    return wrapper
-
-
-@singleton
-# 配置日志记录器
-def setup_logger(log_directory="logs", log_level="INFO"):
+def setup_logger(log_name, log_directory="logs", log_level="INFO"):
     # 获取当前日期和主机名
     hostname = socket.gethostname()
     current_date = datetime.now().strftime("%Y-%m-%d")
@@ -30,7 +14,7 @@ def setup_logger(log_directory="logs", log_level="INFO"):
     log_directory = log_directory
     if not os.path.exists(log_directory):
         os.makedirs(log_directory)
-    log_filename = f"{log_directory}/{hostname}-{current_date}.log"
+    log_filename = log_name
 
     # 创建日志记录器
     logger = logging.getLogger()
@@ -62,7 +46,7 @@ def setup_logger(log_directory="logs", log_level="INFO"):
 
 if __name__ == "__main__":
     # 使用日志记录器
-    logger = setup_logger()
+    logger = setup_logger(log_name="test")
 
     # 记录日志示例
     logger.info("This is an info message.")
