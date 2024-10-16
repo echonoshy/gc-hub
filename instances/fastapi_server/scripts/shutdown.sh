@@ -10,10 +10,7 @@ PIDS=$(lsof -t -i:$PORT)
 if [ -z "$PIDS" ]; then
   echo "No process found running on port $PORT"
 else
-  # 逐个终止所有找到的进程
-  for PID in $PIDS; do
-    kill -9 $PID
-    echo "Terminated process with PID $PID."
-  done
+  # 终止所有找到的进程
+  lsof -t -i:$PORT | xargs kill -9
   echo "All FastAPI services running on port $PORT have been stopped."
 fi
