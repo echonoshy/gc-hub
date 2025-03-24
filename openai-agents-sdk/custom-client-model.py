@@ -18,7 +18,7 @@ async def main():
     # 创建自定义OpenAI客户端，指向第三方API服务（如Deepseek）
     custom_client = AsyncOpenAI(
         base_url="https://api.deepseek.com",  # 替换为您的API服务地址
-        api_key="sk-9837f3d513e64f8cac4246393c983572"  # 替换为您的API密钥
+        api_key="sk-9xxxx2"  # 替换为您的API密钥
     )
     
     # 将自定义客户端设置为默认客户端
